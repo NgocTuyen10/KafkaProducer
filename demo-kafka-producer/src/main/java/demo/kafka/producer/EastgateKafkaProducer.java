@@ -7,38 +7,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class EastgateKafkaProducer {
 
-	private String topic;
-	private String mess;
-	private int partition;
-	private String key;
 
 	@Autowired
 	private KafkaTemplate<String, String> kafkaTemplate;
 
-	public void setTopic(String topic) {
-		this.topic = topic;
+
+
+
+	public void publish(String topic, int partition, String key, String data) {
+		kafkaTemplate.send(topic,partition,key,data);
 	}
 
-	public void setMess(String mess) {
-		this.mess = mess;
+	public void publishToTopic(String topic, String data) {
+		kafkaTemplate.send(topic, data);
 	}
-
-	public void setPartition(int partition) {
-		this.partition = partition;
+	public void publishWithKey(String topic,String key,String data) {
+		kafkaTemplate.send(topic, key, data);
 	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public void publishMessDefault() {
-		kafkaTemplate.send(this.topic, this.mess);
-	}
-
-	public void publishMessWithKey() {
-		kafkaTemplate.send(topic,key,mess);
-	}
-	public void publishessWithKeyPartition() {
-		kafkaTemplate.send(topic, partition, key, mess);
-	}
+	
 }

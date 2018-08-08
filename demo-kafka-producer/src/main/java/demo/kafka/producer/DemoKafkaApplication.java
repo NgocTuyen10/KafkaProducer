@@ -18,8 +18,7 @@ public class DemoKafkaApplication implements CommandLineRunner{
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		kafkaProducer.setTopic("abc");
-		kafkaProducer.setMess("987");
-		kafkaProducer.publishMessDefault();
+		kafkaProducer.publishToTopic("test", "xyz");
+		System.out.println("Done");
 	}
 }
